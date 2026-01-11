@@ -1,0 +1,7 @@
+@model GymManager.Models.Membership
+<h1>Usuń karnet</h1>
+<p>Czy na pewno chcesz usunąć <strong>@Model.Name</strong>?</p>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button class="btn danger">Usuń</button>
+</form>

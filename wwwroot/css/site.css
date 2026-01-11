@@ -1,31 +1,134 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  margin-bottom: 60px;
+font-family: 'Segoe UI', sans-serif;
+background: #f4f6f9;
+margin: 0;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+.hero {
+height: 80vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.hero h1 {
+font-size: 3rem;
+}
+
+.hero-buttons {
+margin-top: 20px;
+}
+
+.btn {
+padding: 10px 20px;
+border-radius: 6px;
+text-decoration: none;
+}
+
+.btn-primary {
+background: #0d6efd;
+color: white;
+}
+
+.btn-secondary {
+background: #c20000;
+color: rgb(0, 0, 0);
+}
+
+.btn-outline {
+border: 2px solid #0d6efd;
+color: #0d6efd;
+}
+
+.auth-container {
+max-width: 400px;
+margin: 60px auto;
+background: white;
+padding: 30px;
+border-radius: 10px;
+box-shadow: 0 10px 30px rgba(0,0,0,.1);
+}
+
+.form-group {
+margin-bottom: 15px;
+}
+
+.form-control {
+width: 100%;
+padding: 8px;
+}
+
+.full {
+width: 100%;
+}
+
+.navbar {
+background: #111827;
+color: white;
+padding: 15px;
+display: flex;
+justify-content: space-between;
+}
+
+.navbar a {
+color: white;
+margin-right: 15px;
+text-decoration: none;
+}
+
+.container {
+padding: 30px;
+}
+
+h1 {
+margin-bottom: 20px;
+}
+
+.table {
+width: 100%;
+background: white;
+border-collapse: collapse;
+}
+
+.table th, .table td {
+padding: 10px;
+border-bottom: 1px solid #ddd;
+}
+
+.btn {
+background: #2563eb;
+color: white;
+padding: 8px 15px;
+border-radius: 5px;
+text-decoration: none;
+display: inline-block;
+}
+
+.btn.danger {
+background: #dc2626;
+}
+
+.form {
+max-width: 400px;
+background: white;
+padding: 20px;
+border-radius: 5px;
+}
+
+.form label {
+display: block;
+margin-top: 10px;
+}
+
+.form input {
+width: 100%;
+padding: 8px;
+margin-top: 5px;
+}
+
+span {
+color: red;
+font-size: 13px;
 }

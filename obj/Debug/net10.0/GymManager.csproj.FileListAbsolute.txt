@@ -18,10 +18,7 @@ C:\Users\anton\GymManager\obj\Debug\net10.0\GymManager.RazorAssemblyInfo.cs
 C:\Users\anton\GymManager\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\Users\anton\GymManager\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\anton\GymManager\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
-C:\Users\anton\GymManager\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\anton\GymManager\obj\Debug\net10.0\scopedcss\bundle\GymManager.styles.css
-C:\Users\anton\GymManager\obj\Debug\net10.0\scopedcss\projectbundle\GymManager.bundle.scp.css
-C:\Users\anton\GymManager\obj\Debug\net10.0\compressed\vz6rp793h0-{0}-b9sayid5wm-b9sayid5wm.gz
 C:\Users\anton\GymManager\obj\Debug\net10.0\compressed\0wi45a8a0k-{0}-61n19gt1b8-61n19gt1b8.gz
 C:\Users\anton\GymManager\obj\Debug\net10.0\compressed\v9d9ykhxko-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
 C:\Users\anton\GymManager\obj\Debug\net10.0\compressed\ia5nt01ezv-{0}-bqjiyaj88i-bqjiyaj88i.gz
@@ -83,8 +80,6 @@ C:\Users\anton\GymManager\obj\Debug\net10.0\compressed\mws5ey9d0r-{0}-2z0ns9nrw6
 C:\Users\anton\GymManager\obj\Debug\net10.0\compressed\wm3fo48dh5-{0}-muycvpuwrr-muycvpuwrr.gz
 C:\Users\anton\GymManager\obj\Debug\net10.0\compressed\bzs89306uj-{0}-87fc7y1x7t-87fc7y1x7t.gz
 C:\Users\anton\GymManager\obj\Debug\net10.0\compressed\szmsgls2kn-{0}-mlv21k5csn-mlv21k5csn.gz
-C:\Users\anton\GymManager\obj\Debug\net10.0\compressed\z4l6rjhbe8-{0}-ko0zwfvxam-ko0zwfvxam.gz
-C:\Users\anton\GymManager\obj\Debug\net10.0\compressed\e62ypp04v2-{0}-ko0zwfvxam-ko0zwfvxam.gz
 C:\Users\anton\GymManager\obj\Debug\net10.0\staticwebassets.build.json
 C:\Users\anton\GymManager\obj\Debug\net10.0\staticwebassets.build.json.cache
 C:\Users\anton\GymManager\obj\Debug\net10.0\staticwebassets.development.json
@@ -337,3 +332,4 @@ C:\Users\anton\GymManager\bin\Debug\net10.0\ru\Microsoft.CodeAnalysis.Scripting.
 C:\Users\anton\GymManager\bin\Debug\net10.0\tr\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\anton\GymManager\bin\Debug\net10.0\zh-Hans\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\anton\GymManager\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.Scripting.resources.dll
+C:\Users\anton\GymManager\obj\Debug\net10.0\compressed\vz6rp793h0-{0}-gqihc91gnd-gqihc91gnd.gz

@@ -1,12 +1,19 @@
-using GymManager.Models;
+using System.ComponentModel.DataAnnotations;
 
-public class Enrollment
+namespace GymManager.Models
 {
-    public int Id { get; set; }
+    public class Enrollment
+    {
+        public int Id { get; set; }
 
-    public string UserId { get; set; }
-    public ApplicationUser User { get; set; }
+        [Required]
+        public string UserId { get; set; }
 
-    public int GymClassId { get; set; }
-    public GymClass GymClass { get; set; }
+        public ApplicationUser User { get; set; }
+
+        [Required]
+        public int GymClassId { get; set; }
+
+        public GymClass GymClass { get; set; }
+    }
 }

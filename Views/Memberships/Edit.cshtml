@@ -1,0 +1,19 @@
+@model GymManager.Models.Membership
+<h1>Edytuj karnet</h1>
+<form asp-action="Edit" class="form">
+    <input type="hidden" asp-for="Id" />
+
+    <label>Nazwa</label>
+    <input asp-for="Name" />
+    <span asp-validation-for="Name"></span>
+
+    <label>Cena</label>
+    <input asp-for="Price" />
+    <span asp-validation-for="Price"></span>
+
+    <label>Dni</label>
+    <input asp-for="DurationInDays" />
+    <span asp-validation-for="DurationInDays"></span>
+
+    <button class="btn">Zapisz</button>
+</form>

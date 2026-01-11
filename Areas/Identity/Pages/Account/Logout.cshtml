@@ -1,0 +1,14 @@
+@page
+@model GymManager.Areas.Identity.Pages.Account.LogoutModel
+@{
+    ViewData["Title"] = "Wylogowanie";
+}
+
+<div class="auth-container">
+    <h2>Czy na pewno chcesz się wylogować?</h2>
+
+    <form method="post">
+        <button type="submit" class="btn btn-primary">Tak, wyloguj</button>
+        <a href="/" class="btn btn-secondary">Anuluj</a>
+    </form>
+</div>

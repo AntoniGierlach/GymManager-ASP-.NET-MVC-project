@@ -1,0 +1,40 @@
+@model IEnumerable<GymManager.Models.Membership>
+@{
+    ViewData["Title"] = "Karnety";
+}
+
+<h1>Karnety</h1>
+
+@if (User.IsInRole("Admin"))
+{
+    <a class="btn" asp-action="Create">➕ Dodaj karnet</a>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Cena</th>
+            <th>Dni</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price zł</td>
+                <td>@item.DurationInDays</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

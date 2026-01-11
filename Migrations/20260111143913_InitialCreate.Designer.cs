@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260110150937_InitialCreate")]
+    [Migration("20260111143913_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -19,46 +19,6 @@ namespace GymManager.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.1");
-
-            modelBuilder.Entity("Enrollment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("GymClassId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GymClassId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Enrollments");
-                });
-
-            modelBuilder.Entity("GymClass", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GymClasses");
-                });
 
             modelBuilder.Entity("GymManager.Models.ApplicationUser", b =>
                 {
@@ -78,6 +38,14 @@ namespace GymManager.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
@@ -124,7 +92,48 @@ namespace GymManager.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Membership", b =>
+            modelBuilder.Entity("GymManager.Models.Enrollment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("GymClassId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GymClassId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Enrollments");
+                });
+
+            modelBuilder.Entity("GymManager.Models.GymClass", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GymClasses");
+                });
+
+            modelBuilder.Entity("GymManager.Models.Membership", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -135,6 +144,7 @@ namespace GymManager.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Price")
@@ -273,9 +283,9 @@ namespace GymManager.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Enrollment", b =>
+            modelBuilder.Entity("GymManager.Models.Enrollment", b =>
                 {
-                    b.HasOne("GymClass", "GymClass")
+                    b.HasOne("GymManager.Models.GymClass", "GymClass")
                         .WithMany("Enrollments")
                         .HasForeignKey("GymClassId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -343,12 +353,12 @@ namespace GymManager.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GymClass", b =>
+            modelBuilder.Entity("GymManager.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Enrollments");
                 });
 
-            modelBuilder.Entity("GymManager.Models.ApplicationUser", b =>
+            modelBuilder.Entity("GymManager.Models.GymClass", b =>
                 {
                     b.Navigation("Enrollments");
                 });
