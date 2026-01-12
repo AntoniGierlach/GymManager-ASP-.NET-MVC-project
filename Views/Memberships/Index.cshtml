@@ -3,38 +3,65 @@
     ViewData["Title"] = "Karnety";
 }
 
-<h1>Karnety</h1>
+<div class="page-header">
+    <h2 class="page-title">
+        <i class="fa-solid fa-ticket"></i> Karnety
+    </h2>
+    <a class="btn btn-primary" asp-action="Create">
+        <i class="fa-solid fa-plus me-2"></i>Dodaj karnet
+    </a>
+</div>
 
-@if (User.IsInRole("Admin"))
+@if (!Model.Any())
 {
-    <a class="btn" asp-action="Create">➕ Dodaj karnet</a>
+    <div class="empty-state">
+        <div class="icon"><i class="fa-solid fa-ticket"></i></div>
+        <h3>Brak karnetów</h3>
+        <p>Dodaj pierwszy karnet, aby użytkownicy mogli go kupić.</p>
+        <div class="mt-3">
+            <a class="btn btn-primary" asp-action="Create">
+                <i class="fa-solid fa-plus me-2"></i>Dodaj karnet
+            </a>
+        </div>
+    </div>
 }
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nazwa</th>
-            <th>Cena</th>
-            <th>Dni</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Price zł</td>
-                <td>@item.DurationInDays</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+else
+{
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Nazwa</th>
+                            <th>Cena</th>
+                            <th>Czas trwania</th>
+                            <th class="text-end">Akcje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var m in Model)
+                        {
+                            <tr>
+                                <td class="fw-semibold">@m.Name</td>
+                                <td>@m.Price.ToString("0.00") zł</td>
+                                <td>@m.DurationInDays dni</td>
+                                <td class="text-end">
+                                    <a class="btn btn-outline-light btn-sm" asp-action="Details" asp-route-id="@m.Id">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                    </a>
+                                    <a class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@m.Id">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@m.Id">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}

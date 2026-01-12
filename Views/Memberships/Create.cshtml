@@ -3,23 +3,44 @@
     ViewData["Title"] = "Dodaj karnet";
 }
 
-<h1>Dodaj karnet</h1>
+<div class="page-header">
+    <h2 class="page-title"><i class="fa-solid fa-plus"></i> Dodaj karnet</h2>
+    <a class="btn btn-outline-light" asp-action="Index">
+        <i class="fa-solid fa-arrow-left me-2"></i>Wróć
+    </a>
+</div>
 
-<form asp-action="Create" class="form">
-    <label>Nazwa</label>
-    <input asp-for="Name" />
-    <span asp-validation-for="Name"></span>
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Create" method="post" class="row g-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <div class="col-12">
+                <label asp-for="Name" class="form-label">Nazwa</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger small"></span>
+            </div>
 
-    <label>Cena</label>
-    <input asp-for="Price" />
-    <span asp-validation-for="Price"></span>
+            <div class="col-12 col-md-6">
+                <label asp-for="Price" class="form-label">Cena</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger small"></span>
+            </div>
 
+            <div class="col-12 col-md-6">
+                <label asp-for="DurationInDays" class="form-label">Czas trwania karnetu (dni)</label>
+                <input asp-for="DurationInDays" class="form-control" />
+                <span asp-validation-for="DurationInDays" class="text-danger small"></span>
+            </div>
 
-    <label>Dni</label>
-    <input asp-for="DurationInDays" />
-    <span asp-validation-for="DurationInDays"></span>
+            <div class="col-12 d-flex gap-2 justify-content-end mt-2">
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="fa-solid fa-check me-2"></i>Zapisz
+                </button>
+                <a class="btn btn-outline-light px-4" asp-action="Index">Anuluj</a>
+            </div>
+        </form>
+    </div>
+</div>
 
-
-    <button type="submit" class="btn">Zapisz</button>
-</form>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

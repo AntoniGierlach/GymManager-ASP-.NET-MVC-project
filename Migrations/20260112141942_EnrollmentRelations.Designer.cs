@@ -3,6 +3,7 @@ using System;
 using GymManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260112141942_EnrollmentRelations")]
+    partial class EnrollmentRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.1");
@@ -95,6 +98,9 @@ namespace GymManager.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("MembershipId")
                         .HasColumnType("INTEGER");
 
@@ -106,6 +112,8 @@ namespace GymManager.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("MembershipId");
 
@@ -268,6 +276,10 @@ namespace GymManager.Migrations
 
             modelBuilder.Entity("GymManager.Models.Enrollment", b =>
                 {
+                    b.HasOne("GymManager.Models.ApplicationUser", null)
+                        .WithMany("Enrollments")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("GymManager.Models.Membership", "Membership")
                         .WithMany("Enrollments")
                         .HasForeignKey("MembershipId")
@@ -275,7 +287,7 @@ namespace GymManager.Migrations
                         .IsRequired();
 
                     b.HasOne("GymManager.Models.ApplicationUser", "User")
-                        .WithMany("Enrollments")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

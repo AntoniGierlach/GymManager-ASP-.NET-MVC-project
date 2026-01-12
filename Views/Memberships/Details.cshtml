@@ -1,7 +1,31 @@
 @model GymManager.Models.Membership
-<h1>@Model.Name</h1>
-<ul>
-    <li>Cena: @Model.Price zł</li>
-    <li>Dni: @Model.DurationInDays</li>
-</ul>
-<a asp-action="Index">⬅ Wróć</a>
+@{
+    ViewData["Title"] = "Szczegóły karnetu";
+}
+
+<div class="page-header">
+    <h2 class="page-title"><i class="fa-solid fa-circle-info"></i> Szczegóły</h2>
+    <div class="d-flex gap-2">
+        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model.Id">
+            <i class="fa-solid fa-pen me-2"></i>Edytuj
+        </a>
+        <a class="btn btn-outline-light" asp-action="Index">
+            <i class="fa-solid fa-arrow-left me-2"></i>Wróć
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-4 text-light-emphasis">Nazwa</dt>
+            <dd class="col-sm-8 fw-semibold">@Model.Name</dd>
+
+            <dt class="col-sm-4 text-light-emphasis">Cena</dt>
+            <dd class="col-sm-8">@Model.Price.ToString("0.00") zł</dd>
+
+            <dt class="col-sm-4 text-light-emphasis">Czas trwania</dt>
+            <dd class="col-sm-8">@Model.DurationInDays dni</dd>
+        </dl>
+    </div>
+</div>

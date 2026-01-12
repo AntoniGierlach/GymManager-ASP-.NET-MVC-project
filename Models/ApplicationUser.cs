@@ -11,6 +11,6 @@ namespace GymManager.Models
         [StringLength(50, ErrorMessage = "Nazwisko może mieć max 50 znaków")]
         public string? LastName { get; set; }
 
-        public ICollection<Enrollment> Enrollments { get; set; }
+        public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
     }
 }

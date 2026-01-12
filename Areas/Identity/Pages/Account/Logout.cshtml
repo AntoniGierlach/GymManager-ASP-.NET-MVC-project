@@ -5,10 +5,15 @@
 }
 
 <div class="auth-container">
-    <h2>Czy na pewno chcesz się wylogować?</h2>
+    <h2 class="auth-title">Wylogowanie</h2>
+    <div class="auth-subtitle">Czy na pewno chcesz się wylogować?</div>
 
-    <form method="post">
-        <button type="submit" class="btn btn-primary">Tak, wyloguj</button>
-        <a href="/" class="btn btn-secondary">Anuluj</a>
+    <form method="post" class="auth-actions">
+        <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-right-from-bracket me-2"></i>Wyloguj
+        </button>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-light">
+            <i class="fa-solid fa-house me-2"></i>Anuluj
+        </a>
     </form>
 </div>

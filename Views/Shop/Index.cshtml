@@ -1,0 +1,63 @@
+@model IEnumerable<GymManager.Models.Membership>
+@{
+    ViewData["Title"] = "Kup karnet";
+}
+
+<div class="page-header">
+    <h2 class="page-title"><i class="fa-solid fa-cart-shopping"></i> Kup karnet</h2>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+@if (!Model.Any())
+{
+    <div class="empty-state">
+        <div class="icon"><i class="fa-solid fa-cart-shopping"></i></div>
+        <h3>Brak dostępnych karnetów</h3>
+        <p>Na razie nie ma czego kupić. Wróć później.</p>
+    </div>
+}
+else
+{
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Karnet</th>
+                            <th>Cena</th>
+                            <th>Czas</th>
+                            <th class="text-end">Kup</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var m in Model)
+                        {
+                            <tr>
+                                <td class="fw-semibold">@m.Name</td>
+                                <td>@m.Price.ToString("0.00") zł</td>
+                                <td>@m.DurationInDays dni</td>
+                                <td class="text-end">
+                                    <form asp-action="Buy" method="post" class="d-inline">
+                                        <input type="hidden" name="membershipId" value="@m.Id" />
+                                        <button class="btn btn-success btn-sm px-3" title="Kup">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}

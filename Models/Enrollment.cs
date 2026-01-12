@@ -7,13 +7,16 @@ namespace GymManager.Models
         public int Id { get; set; }
 
         [Required]
-        public string UserId { get; set; }
+        public string UserId { get; set; } = default!;
 
-        public ApplicationUser User { get; set; }
+        public ApplicationUser User { get; set; } = default!;
 
         [Required]
-        public int GymClassId { get; set; }
+        public int MembershipId { get; set; }
 
-        public GymClass GymClass { get; set; }
+        public Membership Membership { get; set; } = default!;
+
+        [Required]
+        public DateTime PurchasedAt { get; set; } = DateTime.UtcNow;
     }
 }

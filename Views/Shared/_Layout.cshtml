@@ -1,33 +1,118 @@
 ﻿<!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - GymManager</title>
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
-<body>
-    <nav class="navbar">
-        <div class="nav-left">
-            <a class="brand" asp-controller="Home" asp-action="Index">GymManager</a>
-            <a asp-controller="Memberships" asp-action="Index">Karnety</a>
-        </div>
-        <div class="nav-right">
-            @if (User.Identity.IsAuthenticated)
-            {
-                <span>@User.Identity.Name</span>
-                <a asp-area="Identity" asp-page="/Account/Logout">Wyloguj</a>
-            }
-            else
-            {
-                <a asp-area="Identity" asp-page="/Account/Login">Zaloguj</a>
-            }
+
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-dark-subtle sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" asp-controller="Home" asp-action="Index">
+                <span class="brand-badge"><i class="fa-solid fa-dumbbell"></i></span>
+                GymManager
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-controls="mainNav" aria-expanded="false" aria-label="Przełącz nawigację">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav me-auto align-items-lg-center gap-lg-1">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Memberships" asp-action="Index">
+                                <i class="fa-solid fa-ticket me-2"></i>Karnety
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Enrollments" asp-action="Index">
+                                <i class="fa-solid fa-users me-2"></i>Zakupy karnetów
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Users" asp-action="Index">
+                                <i class="fa-solid fa-user-gear me-2"></i>Użytkownicy
+                            </a>
+                        </li>
+                    }
+
+                    @if (User.Identity?.IsAuthenticated == true && User.IsInRole("User"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Shop" asp-action="Index">
+                                <i class="fa-solid fa-cart-shopping me-2"></i>Kup karnet
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Shop" asp-action="My">
+                                <i class="fa-solid fa-id-card me-2"></i>Moje karnety
+                            </a>
+                        </li>
+                    }
+                </ul>
+
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <li class="nav-item">
+                            <span class="nav-link text-light-emphasis d-flex align-items-center gap-2">
+                                <span class="avatar-circle"><i class="fa-solid fa-user"></i></span>
+                                <span class="d-none d-sm-inline">Witaj,</span>
+                                <span class="fw-semibold text-white">@User.Identity!.Name</span>
+                            </span>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="btn btn-outline-light btn-sm px-3" asp-area="Identity" asp-page="/Account/Logout">
+                                <i class="fa-solid fa-right-from-bracket me-2"></i>Wyloguj
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="btn btn-outline-light btn-sm px-3" asp-area="Identity" asp-page="/Account/Login">
+                                <i class="fa-solid fa-right-to-bracket me-2"></i>Zaloguj
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary btn-sm px-3" asp-area="Identity" asp-page="/Account/Register">
+                                <i class="fa-solid fa-user-plus me-2"></i>Rejestracja
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
         </div>
     </nav>
 
-
-    <main class="container">
+    <main class="container py-4 flex-grow-1">
         @RenderBody()
     </main>
+
+    <footer class="app-footer mt-auto">
+        <div class="container py-3 d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
+            <div class="text-muted small">
+                © @DateTime.Now.Year <span class="text-white-50 fw-semibold">GymManager</span> • Projekt zaliczeniowy
+            </div>
+            <div class="d-flex align-items-center gap-3 small">
+                <span class="text-white-50"><i class="fa-solid fa-shield-halved me-2"></i>Identity + Role</span>
+                <span class="text-white-50"><i class="fa-solid fa-database me-2"></i>EF Core</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

@@ -332,4 +332,4 @@ C:\Users\anton\GymManager\bin\Debug\net10.0\ru\Microsoft.CodeAnalysis.Scripting.
 C:\Users\anton\GymManager\bin\Debug\net10.0\tr\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\anton\GymManager\bin\Debug\net10.0\zh-Hans\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\anton\GymManager\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.Scripting.resources.dll
-C:\Users\anton\GymManager\obj\Debug\net10.0\compressed\vz6rp793h0-{0}-gqihc91gnd-gqihc91gnd.gz
+C:\Users\anton\GymManager\obj\Debug\net10.0\compressed\vz6rp793h0-{0}-h4zj16xvap-h4zj16xvap.gz

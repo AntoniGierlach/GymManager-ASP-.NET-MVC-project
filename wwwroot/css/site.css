@@ -1,134 +1,238 @@
-body {
-font-family: 'Segoe UI', sans-serif;
-background: #f4f6f9;
-margin: 0;
+:root{
+  --gm-radius: 16px;
 }
 
-.hero {
-height: 80vh;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
+body{
+  background: #0b1220;
+  color: #e9eefc;
 }
 
-.hero h1 {
-font-size: 3rem;
+.container{
+  max-width: 1100px;
 }
 
-.hero-buttons {
-margin-top: 20px;
+h1, h2, h3, h4, h5, h6{
+  color: #ffffff;
+  font-weight: 800;
 }
 
-.btn {
-padding: 10px 20px;
-border-radius: 6px;
-text-decoration: none;
+a{
+  color: #9ec5ff;
+}
+a:hover{
+  color: #cfe2ff;
 }
 
-.btn-primary {
-background: #0d6efd;
-color: white;
+.card{
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--gm-radius);
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(10px);
+  color: #e9eefc;
 }
 
-.btn-secondary {
-background: #c20000;
-color: rgb(0, 0, 0);
+.table{
+  --bs-table-bg: transparent;
+  --bs-table-color: #ffffff;
+  --bs-table-striped-color: #ffffff;
+  --bs-table-hover-color: #ffffff;
+  color: #ffffff;
 }
 
-.btn-outline {
-border: 2px solid #0d6efd;
-color: #0d6efd;
+.table thead th{
+  color: #ffffff;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255,255,255,.25);
 }
 
-.auth-container {
-max-width: 400px;
-margin: 60px auto;
-background: white;
-padding: 30px;
-border-radius: 10px;
-box-shadow: 0 10px 30px rgba(0,0,0,.1);
+.table tbody td{
+  color: rgba(233,238,252,.92);
 }
 
-.form-group {
-margin-bottom: 15px;
+.table-hover tbody tr:hover{
+  background-color: rgba(255,255,255,0.06);
 }
 
-.form-control {
-width: 100%;
-padding: 8px;
+.btn{
+  border-radius: 12px;
 }
 
-.full {
-width: 100%;
+.btn-outline{
+  border-color: orange;
+  color: orange;
 }
 
-.navbar {
-background: #111827;
-color: white;
-padding: 15px;
-display: flex;
-justify-content: space-between;
+.form-control, .form-select{
+  border-radius: 12px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  color: #ffffff;
 }
 
-.navbar a {
-color: white;
-margin-right: 15px;
-text-decoration: none;
+.form-control::placeholder{
+  color: rgba(233,238,252,.55);
 }
 
-.container {
-padding: 30px;
+.form-control:focus, .form-select:focus{
+  box-shadow: 0 0 0 .2rem rgba(13,110,253,.25);
+  border-color: rgba(13,110,253,.6);
 }
 
-h1 {
-margin-bottom: 20px;
+.form-label{
+  color: #ffffff;
+  font-weight: 600;
 }
 
-.table {
-width: 100%;
-background: white;
-border-collapse: collapse;
+.form-text{
+  color: rgba(233,238,252,.75);
 }
 
-.table th, .table td {
-padding: 10px;
-border-bottom: 1px solid #ddd;
+.text-muted,
+.text-light-emphasis{
+  color: rgba(233,238,252,.72) !important;
 }
 
-.btn {
-background: #2563eb;
-color: white;
-padding: 8px 15px;
-border-radius: 5px;
-text-decoration: none;
-display: inline-block;
+.brand-badge{
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(13,110,253,.18);
+  border: 1px solid rgba(13,110,253,.35);
 }
 
-.btn.danger {
-background: #dc2626;
+.avatar-circle{
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
 }
 
-.form {
-max-width: 400px;
-background: white;
-padding: 20px;
-border-radius: 5px;
+.navbar .nav-link{
+  color: rgba(233,238,252,0.90);
+  font-weight: 500;
+}
+.navbar .nav-link:hover{
+  color: #ffffff;
+}
+.navbar .navbar-brand{
+  color: #ffffff;
 }
 
-.form label {
-display: block;
-margin-top: 10px;
+.auth-container{
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 28px;
+  border-radius: var(--gm-radius);
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  box-shadow: 0 18px 60px rgba(0,0,0,.25);
 }
 
-.form input {
-width: 100%;
-padding: 8px;
-margin-top: 5px;
+.auth-container h2{
+  text-align: center;
+  margin-bottom: 18px;
+  font-weight: 900;
+  color: #ffffff;
 }
 
-span {
-color: red;
-font-size: 13px;
+.auth-title{
+  text-align:center;
+  font-weight: 900;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.auth-subtitle{
+  text-align:center;
+  color: rgba(233,238,252,.80);
+  margin-bottom: 18px;
+}
+
+.auth-actions{
+  display:flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.form-group{
+  margin-bottom: 14px;
+}
+
+.full{
+  width: 100%;
+}
+
+.page-header{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.page-title{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  margin: 0;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.app-footer{
+  border-top: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.35);
+  color: rgba(233,238,252,.78);
+}
+.app-footer a{
+  color: rgba(233,238,252,.85);
+  text-decoration: none;
+}
+.app-footer a:hover{
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.empty-state{
+  padding: 28px;
+  border-radius: 16px;
+  border: 1px dashed rgba(255,255,255,.16);
+  background: rgba(255,255,255,.03);
+  text-align: center;
+}
+
+.empty-state .icon{
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  margin: 0 auto 12px auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(13,110,253,.16);
+  border: 1px solid rgba(13,110,253,.30);
+}
+
+.empty-state h3{
+  font-weight: 900;
+  margin: 0 0 6px 0;
+  color: #ffffff;
+}
+
+.empty-state p{
+  color: rgba(233,238,252,.75);
+  margin: 0;
+}
+
+.text-danger{
+  color: #ff6b6b !important;
 }

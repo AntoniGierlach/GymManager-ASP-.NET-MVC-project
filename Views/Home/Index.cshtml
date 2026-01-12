@@ -5,8 +5,21 @@
 
 <div class="hero">
     <h1>GymManager</h1>
-    <p>Zarządzaj siłownią w prosty i nowoczesny sposób</p>
-
+    <p>
+        Projekt <strong>GymManager</strong> to webowa aplikacja zarządzająca karnetami na siłownię,
+        stworzona w technologii <strong>ASP.NET Core MVC</strong> z wykorzystaniem
+        <strong>Entity Framework Core</strong> oraz <strong>ASP.NET Identity</strong>.
+        Aplikacja umożliwia obsługę dwóch typów użytkowników: administratora oraz
+        zwykłego użytkownika, z jasno rozdzielonymi uprawnieniami i funkcjonalnościami.
+    </p>
+    <p>Celem projektu jest demonstracja praktycznego zastosowania:</p>
+    <ul class="feature-list">
+        <li>programowania aplikacji webowych,</li>
+        <li>pracy z bazą danych oraz relacjami pomiędzy encjami,</li>
+        <li>mechanizmów autoryzacji i uwierzytelniania użytkowników,</li>
+        <li>implementacji pełnego mechanizmu CRUD (Create, Read, Update, Delete),</li>
+        <li>walidacji danych oraz projektowania czytelnego interfejsu użytkownika.</li>
+    </ul>
 
     @if (!User.Identity.IsAuthenticated)
     {
@@ -15,8 +28,12 @@
             <a class="btn btn-outline" asp-area="Identity" asp-page="/Account/Register">Zarejestruj się</a>
         </div>
     }
-    else
+    else if (User.IsInRole("Admin"))
     {
         <a class="btn btn-primary" asp-controller="Memberships" asp-action="Index">Przejdź do aplikacji</a>
+    }
+    else
+    {
+        <a class="btn btn-primary" asp-controller="Shop" asp-action="Index">Przejdź do aplikacji</a>
     }
 </div>

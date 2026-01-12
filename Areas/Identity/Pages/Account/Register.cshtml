@@ -1,14 +1,14 @@
 @page
 @model GymManager.Areas.Identity.Pages.Account.RegisterModel
-
 @{
     ViewData["Title"] = "Rejestracja";
 }
 
-
 <div class="auth-container">
-    <h2>Rejestracja</h2>
+    <h2>Utwórz konto</h2>
+    <div class="auth-subtitle">Wpisz dane, aby założyć konto</div>
 
+    <div asp-validation-summary="All" class="text-danger"></div>
 
     <form method="post">
         <div class="form-group">
@@ -17,13 +17,11 @@
             <span asp-validation-for="Input.Email" class="text-danger"></span>
         </div>
 
-
         <div class="form-group">
             <label asp-for="Input.Password"></label>
             <input asp-for="Input.Password" class="form-control" />
             <span asp-validation-for="Input.Password" class="text-danger"></span>
         </div>
-
 
         <div class="form-group">
             <label asp-for="Input.ConfirmPassword"></label>
@@ -31,7 +29,42 @@
             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
         </div>
 
+        <div class="form-group">
+            <label asp-for="Input.FirstName"></label>
+            <input asp-for="Input.FirstName" class="form-control" />
+            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+        </div>
 
-        <button type="submit" class="btn btn-primary full">Zarejestruj</button>
+        <div class="form-group">
+            <label asp-for="Input.LastName"></label>
+            <input asp-for="Input.LastName" class="form-control" />
+            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.BirthDate"></label>
+            <input asp-for="Input.BirthDate" class="form-control" />
+            <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.PhoneNumber"></label>
+            <input asp-for="Input.PhoneNumber" class="form-control" />
+            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary full">
+            <i class="fa-solid fa-user-plus me-2"></i>Zarejestruj
+        </button>
     </form>
+
+    <div class="auth-actions">
+        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-light btn-sm">
+            <i class="fa-solid fa-right-to-bracket me-2"></i>Logowanie
+        </a>
+    </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
