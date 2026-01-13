@@ -5,6 +5,9 @@
 
 <div class="page-header">
     <h2 class="page-title"><i class="fa-solid fa-cart-shopping"></i> Kup karnet</h2>
+    <a class="btn btn-outline-light" asp-controller="Shop" asp-action="My">
+        <i class="fa-solid fa-id-card me-2"></i>Moje karnety
+    </a>
 </div>
 
 @if (TempData["Success"] != null)
@@ -35,26 +38,59 @@ else
                             <th>Karnet</th>
                             <th>Cena</th>
                             <th>Czas</th>
+                            <th>Obowiązuje w</th>
                             <th class="text-end">Kup</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var m in Model)
-                        {
-                            <tr>
-                                <td class="fw-semibold">@m.Name</td>
-                                <td>@m.Price.ToString("0.00") zł</td>
-                                <td>@m.DurationInDays dni</td>
-                                <td class="text-end">
-                                    <form asp-action="Buy" method="post" class="d-inline">
-                                        <input type="hidden" name="membershipId" value="@m.Id" />
-                                        <button class="btn btn-success btn-sm px-3" title="Kup">
-                                            <i class="fa-solid fa-plus"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        }
+                    @foreach (var m in Model)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@m.Name</td>
+                            <td>@m.Price.ToString("0.00") zł</td>
+                            <td>@m.DurationInDays dni</td>
+                            <td>
+                                @if (m.IsOpenAll)
+                                {
+                                    <span class="badge text-bg-success">
+                                        <i class="fa-solid fa-earth-europe me-1"></i>Wszystkie oddziały (OPEN)
+                                    </span>
+                                }
+                                else
+                                {
+                                    var clubs = m.MembershipClubs?
+                                        .Select(x => x.Club?.Name)
+                                        .OfType<string>()
+                                        .Where(n => !string.IsNullOrWhiteSpace(n))
+                                        .ToList() ?? new List<string>();
+
+                                    if (clubs.Count == 0)
+                                    {
+                                        <span class="badge text-bg-warning">
+                                            <i class="fa-solid fa-triangle-exclamation me-1"></i>Brak przypisanych oddziałów
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        foreach (var clubName in clubs)
+                                        {
+                                            <span class="badge text-bg-secondary me-1 mb-1">
+                                                <i class="fa-solid fa-location-dot me-1"></i>@clubName
+                                            </span>
+                                        }
+                                    }
+                                }
+                            </td>
+                            <td class="text-end">
+                                <form asp-action="Buy" method="post" class="d-inline">
+                                    <input type="hidden" name="membershipId" value="@m.Id" />
+                                    <button class="btn btn-success btn-sm px-3" title="Kup">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
             </div>

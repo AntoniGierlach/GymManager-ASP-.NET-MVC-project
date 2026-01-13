@@ -1,10 +1,11 @@
+using GymManager.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace GymManager.Models
+namespace GymManager.ViewModels
 {
-    public class Membership
+    public class MembershipFormVM
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Required(ErrorMessage = "Nazwa karnetu jest wymagana")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Nazwa musi mieć od 3 do 50 znaków")]
@@ -18,10 +19,11 @@ namespace GymManager.Models
         [Range(1, 365, ErrorMessage = "Czas trwania musi być od 1 do 365 dni")]
         public int DurationInDays { get; set; }
 
-        public bool IsOpenAll { get; set; } = true;
+        [Display(Name = "OPEN (wszystkie oddziały)")]
+        public bool IsOpenAll { get; set; }
 
-        public ICollection<MembershipClub> MembershipClubs { get; set; } = new List<MembershipClub>();
+        public List<int> SelectedClubIds { get; set; } = new();
 
-        public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
+        public List<Club> Clubs { get; set; } = new();
     }
 }

@@ -34,6 +34,7 @@ else
                             <th>Karnet</th>
                             <th>Cena</th>
                             <th>Czas</th>
+                            <th>Obowiązuje w</th>
                             <th>Kupiono</th>
                             <th>Ważny do</th>
                             <th class="text-end">Status</th>
@@ -42,14 +43,49 @@ else
                     <tbody>
                     @foreach (var e in Model)
                     {
+                        var m = e.Membership;
                         var purchasedLocal = e.PurchasedAt.ToLocalTime();
-                        var expires = purchasedLocal.AddDays(e.Membership?.DurationInDays ?? 0);
+                        var expires = purchasedLocal.AddDays(m?.DurationInDays ?? 0);
                         var isActive = DateTime.Now <= expires;
 
                         <tr>
-                            <td class="fw-semibold">@e.Membership?.Name</td>
-                            <td>@(e.Membership?.Price.ToString("0.00") ?? "—") zł</td>
-                            <td>@(e.Membership?.DurationInDays.ToString() ?? "—") dni</td>
+                            <td class="fw-semibold">@m?.Name</td>
+                            <td>@(m?.Price.ToString("0.00") ?? "—") zł</td>
+                            <td>@(m?.DurationInDays.ToString() ?? "—") dni</td>
+
+                            <td>
+                                @if (m?.IsOpenAll == true)
+                                {
+                                    <span class="badge text-bg-success">
+                                        <i class="fa-solid fa-earth-europe me-1"></i>Wszystkie oddziały (OPEN)
+                                    </span>
+                                }
+                                else
+                                {
+                                    var clubs = m?.MembershipClubs?
+                                        .Select(x => x.Club?.Name)
+                                        .OfType<string>()
+                                        .Where(n => !string.IsNullOrWhiteSpace(n))
+                                        .ToList() ?? new List<string>();
+
+                                    if (clubs.Count == 0)
+                                    {
+                                        <span class="badge text-bg-warning">
+                                            <i class="fa-solid fa-triangle-exclamation me-1"></i>Brak przypisanych oddziałów
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        foreach (var clubName in clubs)
+                                        {
+                                            <span class="badge text-bg-secondary me-1 mb-1">
+                                                <i class="fa-solid fa-location-dot me-1"></i>@clubName
+                                            </span>
+                                        }
+                                    }
+                                }
+                            </td>
+
                             <td>@purchasedLocal.ToString("yyyy-MM-dd HH:mm")</td>
                             <td>@expires.ToString("yyyy-MM-dd")</td>
                             <td class="text-end">

@@ -1,0 +1,34 @@
+@model GymManager.Models.Club
+@{
+    ViewData["Title"] = "Szczegóły oddziału";
+}
+
+<div class="page-header">
+    <h2 class="page-title"><i class="fa-solid fa-circle-info"></i> Szczegóły oddziału</h2>
+    <div class="d-flex gap-2">
+        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model.Id">
+            <i class="fa-solid fa-pen me-2"></i>Edytuj
+        </a>
+        <a class="btn btn-outline-light" asp-action="Index">
+            <i class="fa-solid fa-arrow-left me-2"></i>Wróć
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-4 text-light-emphasis">Nazwa</dt>
+            <dd class="col-sm-8 fw-semibold">@Model.Name</dd>
+
+            <dt class="col-sm-4 text-light-emphasis">Adres</dt>
+            <dd class="col-sm-8">@Model.Address</dd>
+
+            <dt class="col-sm-4 text-light-emphasis">Telefon</dt>
+            <dd class="col-sm-8">@Model.ContactPhone</dd>
+
+            <dt class="col-sm-4 text-light-emphasis">Email</dt>
+            <dd class="col-sm-8">@Model.ContactEmail</dd>
+        </dl>
+    </div>
+</div>

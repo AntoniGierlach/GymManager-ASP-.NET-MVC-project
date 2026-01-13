@@ -89,6 +89,37 @@ namespace GymManager.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("GymManager.Models.Club", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ContactEmail")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ContactPhone")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clubs");
+                });
+
             modelBuilder.Entity("GymManager.Models.Enrollment", b =>
                 {
                     b.Property<int>("Id")
@@ -123,6 +154,9 @@ namespace GymManager.Migrations
                     b.Property<int>("DurationInDays")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsOpenAll")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -136,6 +170,21 @@ namespace GymManager.Migrations
                     b.HasIndex("Name");
 
                     b.ToTable("Memberships");
+                });
+
+            modelBuilder.Entity("GymManager.Models.MembershipClub", b =>
+                {
+                    b.Property<int>("MembershipId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ClubId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("MembershipId", "ClubId");
+
+                    b.HasIndex("ClubId");
+
+                    b.ToTable("MembershipClubs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -285,6 +334,25 @@ namespace GymManager.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("GymManager.Models.MembershipClub", b =>
+                {
+                    b.HasOne("GymManager.Models.Club", "Club")
+                        .WithMany("MembershipClubs")
+                        .HasForeignKey("ClubId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GymManager.Models.Membership", "Membership")
+                        .WithMany("MembershipClubs")
+                        .HasForeignKey("MembershipId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Club");
+
+                    b.Navigation("Membership");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -341,9 +409,16 @@ namespace GymManager.Migrations
                     b.Navigation("Enrollments");
                 });
 
+            modelBuilder.Entity("GymManager.Models.Club", b =>
+                {
+                    b.Navigation("MembershipClubs");
+                });
+
             modelBuilder.Entity("GymManager.Models.Membership", b =>
                 {
                     b.Navigation("Enrollments");
+
+                    b.Navigation("MembershipClubs");
                 });
 #pragma warning restore 612, 618
         }

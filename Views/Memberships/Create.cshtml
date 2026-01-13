@@ -1,4 +1,4 @@
-@model GymManager.Models.Membership
+@model GymManager.ViewModels.MembershipFormVM
 @{
     ViewData["Title"] = "Dodaj karnet";
 }
@@ -13,7 +13,7 @@
 <div class="card">
     <div class="card-body">
         <form asp-action="Create" method="post" class="row g-3">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="col-12">
                 <label asp-for="Name" class="form-label">Nazwa</label>
@@ -28,9 +28,56 @@
             </div>
 
             <div class="col-12 col-md-6">
-                <label asp-for="DurationInDays" class="form-label">Czas trwania karnetu (dni)</label>
+                <label asp-for="DurationInDays" class="form-label">Czas trwania (dni)</label>
                 <input asp-for="DurationInDays" class="form-control" />
                 <span asp-validation-for="DurationInDays" class="text-danger small"></span>
+            </div>
+
+            <hr class="mt-3" />
+
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="IsOpenAll" id="isOpenAll" />
+                    <label class="form-check-label" for="isOpenAll">
+                        <strong>OPEN</strong> — karnet obowiązuje we wszystkich oddziałach
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-12" id="clubsBox">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="fw-semibold mb-2">Wybierz oddziały:</div>
+
+                        @if (Model.Clubs == null || !Model.Clubs.Any())
+                        {
+                            <div class="text-danger">
+                                Brak oddziałów w systemie — dodaj oddziały w panelu „Oddziały”, albo ustaw OPEN.
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row g-2">
+                                @foreach (var club in Model.Clubs)
+                                {
+                                    <div class="col-12 col-md-6">
+                                        <label class="d-flex align-items-start gap-2">
+                                            <input type="checkbox"
+                                                   name="SelectedClubIds"
+                                                   value="@club.Id"
+                                                   class="form-check-input mt-1"
+                                                   @(Model.SelectedClubIds.Contains(club.Id) ? "checked" : "") />
+                                            <div>
+                                                <div class="fw-semibold">@club.Name</div>
+                                                <div class="text-muted small">@club.Address</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
 
             <div class="col-12 d-flex gap-2 justify-content-end mt-2">
@@ -43,4 +90,16 @@
     </div>
 </div>
 
-@section Scripts { <partial name="_ValidationScriptsPartial" /> }
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const openAll = document.getElementById('isOpenAll');
+        const clubsBox = document.getElementById('clubsBox');
+
+        function syncClubsBox(){
+            clubsBox.style.display = openAll.checked ? 'none' : 'block';
+        }
+        openAll.addEventListener('change', syncClubsBox);
+        syncClubsBox();
+    </script>
+}

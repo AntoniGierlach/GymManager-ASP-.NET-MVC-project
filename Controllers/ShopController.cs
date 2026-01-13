@@ -21,7 +21,12 @@ namespace GymManager.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var memberships = await _db.Memberships.ToListAsync();
+            var memberships = await _db.Memberships
+                .Include(m => m.MembershipClubs)
+                    .ThenInclude(mc => mc.Club)
+                .OrderBy(m => m.Name)
+                .ToListAsync();
+
             return View(memberships);
         }
 
@@ -70,6 +75,8 @@ namespace GymManager.Controllers
             var enrollments = await _db.Enrollments
                 .Where(e => e.UserId == user.Id)
                 .Include(e => e.Membership)
+                    .ThenInclude(m => m.MembershipClubs)
+                        .ThenInclude(mc => mc.Club)
                 .OrderByDescending(e => e.PurchasedAt)
                 .ToListAsync();
 

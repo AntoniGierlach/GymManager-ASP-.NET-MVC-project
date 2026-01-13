@@ -53,17 +53,19 @@ namespace GymManager.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GymClasses",
+                name: "Clubs",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    Date = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", maxLength: 80, nullable: false),
+                    Address = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    ContactPhone = table.Column<string>(type: "TEXT", maxLength: 30, nullable: false),
+                    ContactEmail = table.Column<string>(type: "TEXT", maxLength: 120, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GymClasses", x => x.Id);
+                    table.PrimaryKey("PK_Clubs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,8 +75,9 @@ namespace GymManager.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
-                    DurationInDays = table.Column<int>(type: "INTEGER", nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    DurationInDays = table.Column<int>(type: "INTEGER", nullable: false),
+                    IsOpenAll = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -194,7 +197,8 @@ namespace GymManager.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<string>(type: "TEXT", nullable: false),
-                    GymClassId = table.Column<int>(type: "INTEGER", nullable: false)
+                    MembershipId = table.Column<int>(type: "INTEGER", nullable: false),
+                    PurchasedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -204,11 +208,35 @@ namespace GymManager.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Enrollments_Memberships_MembershipId",
+                        column: x => x.MembershipId,
+                        principalTable: "Memberships",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MembershipClubs",
+                columns: table => new
+                {
+                    MembershipId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ClubId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MembershipClubs", x => new { x.MembershipId, x.ClubId });
+                    table.ForeignKey(
+                        name: "FK_MembershipClubs_Clubs_ClubId",
+                        column: x => x.ClubId,
+                        principalTable: "Clubs",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Enrollments_GymClasses_GymClassId",
-                        column: x => x.GymClassId,
-                        principalTable: "GymClasses",
+                        name: "FK_MembershipClubs_Memberships_MembershipId",
+                        column: x => x.MembershipId,
+                        principalTable: "Memberships",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -251,14 +279,24 @@ namespace GymManager.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Enrollments_GymClassId",
+                name: "IX_Enrollments_MembershipId",
                 table: "Enrollments",
-                column: "GymClassId");
+                column: "MembershipId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Enrollments_UserId",
+                name: "IX_Enrollments_UserId_MembershipId",
                 table: "Enrollments",
-                column: "UserId");
+                columns: new[] { "UserId", "MembershipId" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MembershipClubs_ClubId",
+                table: "MembershipClubs",
+                column: "ClubId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Memberships_Name",
+                table: "Memberships",
+                column: "Name");
         }
 
         /// <inheritdoc />
@@ -283,7 +321,7 @@ namespace GymManager.Migrations
                 name: "Enrollments");
 
             migrationBuilder.DropTable(
-                name: "Memberships");
+                name: "MembershipClubs");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -292,7 +330,10 @@ namespace GymManager.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "GymClasses");
+                name: "Clubs");
+
+            migrationBuilder.DropTable(
+                name: "Memberships");
         }
     }
 }

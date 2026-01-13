@@ -1,0 +1,52 @@
+@model GymManager.Models.Club
+@{
+    ViewData["Title"] = "Dodaj oddział";
+}
+
+<div class="page-header">
+    <h2 class="page-title"><i class="fa-solid fa-plus"></i> Dodaj oddział</h2>
+    <a class="btn btn-outline-light" asp-action="Index">
+        <i class="fa-solid fa-arrow-left me-2"></i>Wróć
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Create" method="post" class="row g-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-12">
+                <label asp-for="Name" class="form-label">Nazwa</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger small"></span>
+            </div>
+
+            <div class="col-12">
+                <label asp-for="Address" class="form-label">Adres</label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger small"></span>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <label asp-for="ContactPhone" class="form-label">Telefon</label>
+                <input asp-for="ContactPhone" class="form-control" />
+                <span asp-validation-for="ContactPhone" class="text-danger small"></span>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <label asp-for="ContactEmail" class="form-label">Email</label>
+                <input asp-for="ContactEmail" class="form-control" />
+                <span asp-validation-for="ContactEmail" class="text-danger small"></span>
+            </div>
+
+            <div class="col-12 d-flex gap-2 justify-content-end mt-2">
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="fa-solid fa-check me-2"></i>Zapisz
+                </button>
+                <a class="btn btn-outline-light px-4" asp-action="Index">Anuluj</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

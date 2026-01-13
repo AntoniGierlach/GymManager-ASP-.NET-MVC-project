@@ -4,11 +4,15 @@
 }
 
 <div class="page-header">
-    <h2 class="page-title"><i class="fa-solid fa-circle-info"></i> Szczegóły</h2>
+    <h2 class="page-title"><i class="fa-solid fa-circle-info"></i> Szczegóły karnetu</h2>
+
     <div class="d-flex gap-2">
-        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model.Id">
-            <i class="fa-solid fa-pen me-2"></i>Edytuj
-        </a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model.Id">
+                <i class="fa-solid fa-pen me-2"></i>Edytuj
+            </a>
+        }
         <a class="btn btn-outline-light" asp-action="Index">
             <i class="fa-solid fa-arrow-left me-2"></i>Wróć
         </a>
@@ -26,6 +30,38 @@
 
             <dt class="col-sm-4 text-light-emphasis">Czas trwania</dt>
             <dd class="col-sm-8">@Model.DurationInDays dni</dd>
+
+            <dt class="col-sm-4 text-light-emphasis">Obowiązuje w</dt>
+            <dd class="col-sm-8">
+                @if (Model.IsOpenAll)
+                {
+                    <span class="badge text-bg-success">
+                        <i class="fa-solid fa-earth-europe me-1"></i>Wszystkie oddziały (OPEN)
+                    </span>
+                }
+                else
+                {
+                    var clubs = Model.MembershipClubs?
+                    .Select(x => x.Club?.Name)
+                    .OfType<string>()
+                    .Where(n => !string.IsNullOrWhiteSpace(n))
+                    .ToList() ?? new List<string>();
+
+                    if (clubs.Count == 0)
+                    {
+                        <span class="badge text-bg-warning">
+                            <i class="fa-solid fa-triangle-exclamation me-1"></i>Brak przypisanych oddziałów
+                        </span>
+                    }
+                    else
+                    {
+                        foreach (var clubName in clubs)
+                        {
+                            <span class="badge text-bg-secondary me-1 mb-1">
+                                <i class="fa-solid fa-location-dot me-1"></i>@clubName
+                            </span>
+                        }
+                    }
+                }
+            </dd>
         </dl>
-    </div>
-</div>
