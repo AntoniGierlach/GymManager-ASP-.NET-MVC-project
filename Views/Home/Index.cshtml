@@ -21,7 +21,7 @@
         <li>walidacji danych oraz projektowania czytelnego interfejsu użytkownika.</li>
     </ul>
 
-    @if (!User.Identity.IsAuthenticated)
+    @if (!(User.Identity?.IsAuthenticated ?? false))
     {
         <div class="hero-buttons">
             <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Zaloguj się</a>

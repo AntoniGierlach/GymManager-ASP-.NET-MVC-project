@@ -16,15 +16,15 @@ namespace GymManager.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public InputModel Input { get; set; } = new();
 
         public class InputModel
         {
             [Required, EmailAddress]
-            public string Email { get; set; }
+            public string Email { get; set; }  = string.Empty;
 
             [Required, DataType(DataType.Password)]
-            public string Password { get; set; }
+            public string Password { get; set; }  = string.Empty;
         }
 
         public async Task<IActionResult> OnPostAsync()

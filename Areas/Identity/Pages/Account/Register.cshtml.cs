@@ -20,31 +20,31 @@ namespace GymManager.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public InputModel Input { get; set; } = new();
 
         public class InputModel
         {
             [Required, EmailAddress]
             [Display(Name = "Email")]
-            public string Email { get; set; }
+            public string Email { get; set; } = string.Empty;
 
             [Required, StringLength(100, ErrorMessage = "{0} musi mieć co najmniej {2} i maksymalnie {1} znaków.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Hasło")]
-            public string Password { get; set; }
+            public string Password { get; set; } = string.Empty;
 
             [DataType(DataType.Password)]
             [Display(Name = "Potwierdź hasło")]
             [Compare("Password", ErrorMessage = "Hasła nie pasują do siebie.")]
-            public string ConfirmPassword { get; set; }
+            public string ConfirmPassword { get; set; } = string.Empty;
 
             [Required, StringLength(50, MinimumLength = 2)]
             [Display(Name = "Imię")]
-            public string FirstName { get; set; }
+            public string FirstName { get; set; } = string.Empty;
 
             [Required, StringLength(50, MinimumLength = 2)]
             [Display(Name = "Nazwisko")]
-            public string LastName { get; set; }
+            public string LastName { get; set; } = string.Empty;
 
             [Required, DataType(DataType.Date)]
             [Display(Name = "Data urodzenia")]
@@ -52,7 +52,7 @@ namespace GymManager.Areas.Identity.Pages.Account
 
             [Required, StringLength(20)]
             [Display(Name = "Numer telefonu")]
-            public string PhoneNumber { get; set; }
+            public string PhoneNumber { get; set; } = string.Empty;
         }
 
         public void OnGet()

@@ -103,6 +103,9 @@ namespace GymManager.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var membership = await _context.Memberships.FindAsync(id);
+            if (membership == null)
+                return NotFound();
+
             _context.Memberships.Remove(membership);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
