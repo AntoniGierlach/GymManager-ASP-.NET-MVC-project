@@ -141,4 +141,4 @@ Konta testowe są tworzone automatycznie przy starcie aplikacji (seed danych).
 ## Autorzy
 [Antoni Gierlach](https://github.com/AntoniGierlach)
 
-Projekt wykonany w ramachprojektu z zakresu tworzenia aplikacji webowych.
+Projekt wykonany w ramach projektu z zakresu tworzenia aplikacji webowych.
