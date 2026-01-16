@@ -132,8 +132,8 @@ Po uruchomieniu aplikacja będzie dostępna pod adresem: `https://localhost:xxxx
 ## Konta testowe
 | Rola | Email | Hasło |
 | :---: | :---: | :---: |
-| Admin | admin@gym.local | Admin123! |
-| User | user@gym.local | User123! |
+| Admin | admin@gym.pl | Admin123! |
+| User | user@gym.pl | User123! |
 
 Konta testowe są tworzone automatycznie przy starcie aplikacji (seed danych).
 
